@@ -39,4 +39,20 @@ const getGame = gameId => gql`
     }
   }`;
 
-module.exports = { getGame };
+const createGame = gameInput => ({
+  mutation: gql`
+    mutation createGame($gameInput: GameInputContainer!) {
+      createGame(game: $gameInput) {
+        game {
+          id
+          player {
+            name
+          }
+        }
+      }
+    }
+  `,
+  variables: { gameInput }
+});
+
+module.exports = { getGame, createGame };

@@ -1,9 +1,9 @@
-exports.getGameExample = gameId => ({
+exports.getGameExample = ({ gameId = 'abc123', name = 'Fred' }) => ({
   game: {
     id: gameId,
     turns: [{ entityWhoPlays: 'Player', cardCanBePlayed: true, cardPlayed: null }],
     player: {
-      name: 'Fred',
+      name,
       hp: 20,
       shield: 0,
       cardsInHand: [

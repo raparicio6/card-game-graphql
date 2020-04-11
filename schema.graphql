@@ -3,6 +3,10 @@ type Query {
   healthCheck: String!
 }
 
+type Mutation {
+  createGame(game: GameInputContainer!): GameContainer!
+}
+
 type GameContainer {
   game: Game!
 }

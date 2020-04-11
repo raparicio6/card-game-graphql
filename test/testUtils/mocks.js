@@ -8,4 +8,9 @@ const {
 exports.mockGetGame = gameId =>
   nock(`${gameApiBaseUrl}`)
     .get(`/games/${gameId}`)
-    .reply(200, getGameExample(gameId));
+    .reply(200, getGameExample({ gameId }));
+
+exports.mockCreateGame = playerName =>
+  nock(`${gameApiBaseUrl}`)
+    .post('/games', { game: { playerName } })
+    .reply(201, getGameExample({ playerName }));

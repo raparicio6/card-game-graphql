@@ -13,24 +13,27 @@ describe('games', () => {
 
     it('should get game properly', () =>
       query(getGame(gameId)).then(res => {
-        const expectedGame = getGameExample(gameId);
+        const expectedGame = getGameExample({ gameId });
+        const {
+          game: { turns, player, monster, monsterEffect, winner }
+        } = expectedGame;
         expect(res.data.game).toMatchObject({
           game: {
             id: gameId,
-            turns: expectedGame.game.turns,
+            turns,
             player: {
-              name: expectedGame.game.player.name,
-              hp: expectedGame.game.player.hp,
-              shield: expectedGame.game.player.shield,
-              cardsInHand: expectedGame.game.player.cardsInHand
+              name: player.name,
+              hp: player.hp,
+              shield: player.shield,
+              cardsInHand: player.cardsInHand
             },
             monster: {
-              hp: expectedGame.game.monster.hp,
-              shield: expectedGame.game.monster.shield,
-              cardsInHand: expectedGame.game.monster.cardsInHand
+              hp: monster.hp,
+              shield: monster.shield,
+              cardsInHand: monster.cardsInHand
             },
-            monsterEffect: expectedGame.game.monsterEffect,
-            winner: expectedGame.game.winner
+            monsterEffect,
+            winner
           }
         });
       }));

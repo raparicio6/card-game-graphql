@@ -4,6 +4,9 @@ const rootTypes = gql`
   extend type Query {
     game(gameId: String!): GameContainer!
   }
+  extend type Mutation {
+    createGame(game: GameInputContainer!): GameContainer!
+  }
 `;
 
 const customTypes = gql`
@@ -40,4 +43,13 @@ const customTypes = gql`
   }
 `;
 
-exports.typeDefs = [rootTypes, customTypes];
+const inputTypes = gql`
+  input GameInputContainer {
+    game: GameInput!
+  }
+  input GameInput {
+    playerName: String!
+  }
+`;
+
+exports.typeDefs = [rootTypes, customTypes, inputTypes];
