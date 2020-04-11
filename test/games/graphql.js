@@ -47,7 +47,34 @@ const createGame = gameInput => ({
           id
           player {
             name
+            hp
+            shield
+            cardsInHand {
+              type
+              value
+            }
           }
+          monster {
+            hp
+            shield
+            cardsInHand {
+              type
+              value
+            }
+          }
+          turns {
+            entityWhoPlays
+            cardCanBePlayed
+            cardPlayed {
+              type
+              value
+            }
+          }
+          monsterEffect {
+            type
+            value
+          }
+          winner
         }
       }
     }

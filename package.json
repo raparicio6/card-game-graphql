@@ -79,11 +79,5 @@
     "prettier": "^1.15.3",
     "prettier-eslint": "^8.8.2",
     "supertest": "^4.0.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit",
-      "pre-push": "npm test"
-    }
   }
 }

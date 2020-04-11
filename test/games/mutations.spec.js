@@ -15,13 +15,18 @@ describe('games', () => {
       mutate(createGame({ game: { playerName } })).then(res => {
         const expectedGame = getGameExample({ playerName });
         const {
-          game: { id: expectedId, player: expectedPlayer }
+          game: { id, turns, player, monster, monsterEffect, winner }
         } = expectedGame;
-        const {
-          game: { id, player }
-        } = res.data.createGame;
-        expect(id).toEqual(expectedId);
-        expect(player.name).toEqual(expectedPlayer.name);
+        expect(res.data.createGame).toMatchObject({
+          game: {
+            id,
+            turns,
+            player,
+            monster,
+            monsterEffect,
+            winner
+          }
+        });
       }));
   });
 });

@@ -21,17 +21,8 @@ describe('games', () => {
           game: {
             id: gameId,
             turns,
-            player: {
-              name: player.name,
-              hp: player.hp,
-              shield: player.shield,
-              cardsInHand: player.cardsInHand
-            },
-            monster: {
-              hp: monster.hp,
-              shield: monster.shield,
-              cardsInHand: monster.cardsInHand
-            },
+            player,
+            monster,
             monsterEffect,
             winner
           }
