@@ -82,4 +82,47 @@ const createGame = gameInput => ({
   variables: { gameInput }
 });
 
-module.exports = { getGame, createGame };
+const playTurn = (gameId, turnInput) => ({
+  mutation: gql`
+    mutation playTurn($gameId: String!, $turnInput: TurnInputContainer!) {
+      playTurn(gameId: $gameId, turn: $turnInput) {
+        game {
+          id
+          player {
+            name
+            hp
+            shield
+            cardsInHand {
+              type
+              value
+            }
+          }
+          monster {
+            hp
+            shield
+            cardsInHand {
+              type
+              value
+            }
+          }
+          turns {
+            entityWhoPlays
+            cardCanBePlayed
+            cardPlayed {
+              type
+              value
+            }
+          }
+          monsterEffect {
+            type
+            value
+          }
+          winner
+        }
+      }
+    }
+  `,
+  variables: { gameId, turnInput }
+});
+
+module.exports = { getGame, createGame, playTurn };

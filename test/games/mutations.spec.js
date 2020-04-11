@@ -1,19 +1,15 @@
 const { mutate } = require('../server.test'),
-  { createGame } = require('./graphql'),
-  { mockCreateGame } = require('../testUtils/mocks'),
-  { getGameExample } = require('../testUtils/schemas/gamesSchemas');
+  { createGame, playTurn } = require('./graphql'),
+  { mockCreateGame, mockPlayTurn } = require('../testUtils/mocks'),
+  { getGameExample, getGameWithTurns } = require('../testUtils/schemas/gamesSchemas');
 
 describe('games', () => {
-  const playerName = 'Paul';
-  beforeAll(done => {
-    mockCreateGame(playerName);
-    return done();
-  });
-
   describe('mutations', () => {
-    it('should create a game successfuly', () =>
-      mutate(createGame({ game: { playerName } })).then(res => {
-        const expectedGame = getGameExample({ playerName });
+    it('should create a game successfuly', () => {
+      const playerName = 'Paul';
+      const expectedGame = getGameExample({ playerName });
+      mockCreateGame(playerName, expectedGame);
+      return mutate(createGame({ game: { playerName } })).then(res => {
         const {
           game: { id, turns, player, monster, monsterEffect, winner }
         } = expectedGame;
@@ -27,6 +23,28 @@ describe('games', () => {
             winner
           }
         });
-      }));
+      });
+    });
+
+    it('should play a turn successfuly', () => {
+      const gameId = 'abc123';
+      const expectedGame = getGameWithTurns(gameId);
+      mockPlayTurn(gameId, expectedGame);
+      return mutate(playTurn(gameId, { turn: { cardPlayed: { value: 9, type: 'damage' } } })).then(res => {
+        const {
+          game: { id, turns, player, monster, monsterEffect, winner }
+        } = expectedGame;
+        expect(res.data.playTurn).toMatchObject({
+          game: {
+            id,
+            turns,
+            player,
+            monster,
+            monsterEffect,
+            winner
+          }
+        });
+      });
+    });
   });
 });

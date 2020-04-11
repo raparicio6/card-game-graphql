@@ -2,7 +2,7 @@ const request = require('axios');
 const {
   common: { gameApiBaseUrl }
 } = require('../../config');
-const { GET, POST } = require('../constants');
+const { GET, POST, PUT } = require('../constants');
 
 exports.getGame = gameId => {
   const options = {
@@ -20,6 +20,17 @@ exports.createGame = playerName => {
       game: {
         playerName
       }
+    }
+  };
+  return request(options).then(response => response.data);
+};
+
+exports.playTurn = (gameId, turn) => {
+  const options = {
+    method: PUT,
+    url: `${gameApiBaseUrl}/games/${gameId}`,
+    data: {
+      turn
     }
   };
   return request(options).then(response => response.data);

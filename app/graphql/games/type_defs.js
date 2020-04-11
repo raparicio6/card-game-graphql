@@ -6,6 +6,7 @@ const rootTypes = gql`
   }
   extend type Mutation {
     createGame(game: GameInputContainer!): GameContainer!
+    playTurn(gameId: String!, turn: TurnInputContainer!): GameContainer!
   }
 `;
 
@@ -49,6 +50,16 @@ const inputTypes = gql`
   }
   input GameInput {
     playerName: String!
+  }
+  input TurnInputContainer {
+    turn: TurnInput!
+  }
+  input TurnInput {
+    cardPlayed: CardInput
+  }
+  input CardInput {
+    type: String!
+    value: Int
   }
 `;
 

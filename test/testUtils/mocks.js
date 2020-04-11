@@ -1,16 +1,20 @@
 const nock = require('nock');
 
-const { getGameExample } = require('./schemas/gamesSchemas');
 const {
   common: { gameApiBaseUrl }
 } = require('../../config');
 
-exports.mockGetGame = gameId =>
+exports.mockGetGame = (gameId, expectedGame) =>
   nock(`${gameApiBaseUrl}`)
     .get(`/games/${gameId}`)
-    .reply(200, getGameExample({ gameId }));
+    .reply(200, expectedGame);
 
-exports.mockCreateGame = playerName =>
+exports.mockCreateGame = (playerName, expectedGame) =>
   nock(`${gameApiBaseUrl}`)
     .post('/games', { game: { playerName } })
-    .reply(201, getGameExample({ playerName }));
+    .reply(201, expectedGame);
+
+exports.mockPlayTurn = (gameId, expectedGame) =>
+  nock(`${gameApiBaseUrl}`)
+    .put(`/games/${gameId}`)
+    .reply(200, expectedGame);

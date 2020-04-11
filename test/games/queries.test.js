@@ -6,14 +6,14 @@ const { query } = require('../server.test'),
 describe('games', () => {
   describe('queries', () => {
     const gameId = 'hi123';
+    const expectedGame = getGameExample({ gameId });
     beforeAll(done => {
-      mockGetGame(gameId);
+      mockGetGame(gameId, expectedGame);
       return done();
     });
 
     it('should get game properly', () =>
       query(getGame(gameId)).then(res => {
-        const expectedGame = getGameExample({ gameId });
         const {
           game: { turns, player, monster, monsterEffect, winner }
         } = expectedGame;
