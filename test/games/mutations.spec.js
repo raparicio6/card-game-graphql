@@ -1,7 +1,7 @@
 const { mutate } = require('../server.test'),
   { createGame, playTurn } = require('./graphql'),
   { mockCreateGame, mockPlayTurn } = require('../testUtils/mocks'),
-  { getGameExample, getGameWithTurns } = require('../testUtils/schemas/gamesSchemas');
+  { getGameExample, getGameWithTurnsExample } = require('../testUtils/schemas/gamesSchemas');
 
 describe('games', () => {
   describe('mutations', () => {
@@ -28,7 +28,7 @@ describe('games', () => {
 
     it('should play a turn successfuly', () => {
       const gameId = 'abc123';
-      const expectedGame = getGameWithTurns(gameId);
+      const expectedGame = getGameWithTurnsExample(gameId);
       mockPlayTurn(gameId, expectedGame);
       return mutate(playTurn(gameId, { turn: { cardPlayed: { value: 9, type: 'damage' } } })).then(res => {
         const {

@@ -35,7 +35,7 @@ exports.getGameExample = ({ gameId = 'abc123', name = 'Fred' }) => ({
   }
 });
 
-exports.getGameWithTurns = gameId => ({
+exports.getGameWithTurnsExample = gameId => ({
   game: {
     id: gameId,
     turns: [
@@ -117,3 +117,5 @@ exports.getGameWithTurns = gameId => ({
     winner: null
   }
 });
+
+exports.gameWasNotFoundError = { message: 'Game was not found', internalCode: 'game_was_not_found_error' };

@@ -33,13 +33,20 @@
     "url": "git@github.com:raparicio6/card-game-graphql.git/issues"
   },
   "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
     "collectCoverageFrom": [
-      "**/*.js",
+      "app/**/*.js",
       "!**/node_modules/**",
       "!**/build/**",
       "!**/config/**",
-      "!**/scripts/**",
-      "!**/docs/**"
+      "!**/scripts/**"
     ],
     "testEnvironment": "node",
     "transform": {
