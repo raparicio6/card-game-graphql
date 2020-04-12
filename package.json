@@ -47,7 +47,7 @@
       "!**/config/**",
       "!**/scripts/**",
       "!app/graphql/index.js",
-      "!app/graphql/schema_import.js"
+      "!app/graphql/schemaImport.js"
     ],
     "testEnvironment": "node",
     "transform": {
