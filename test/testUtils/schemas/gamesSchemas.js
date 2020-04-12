@@ -119,3 +119,5 @@ exports.getGameWithTurnsExample = gameId => ({
 });
 
 exports.gameWasNotFoundError = { message: 'Game was not found', internalCode: 'game_was_not_found_error' };
+
+exports.databaseError = { message: 'Connection is closed.', internalCode: 'database_error' };

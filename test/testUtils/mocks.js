@@ -19,6 +19,11 @@ exports.mockCreateGame = (playerName, expectedGame) =>
     .post('/games', { game: { playerName } })
     .reply(201, expectedGame);
 
+exports.mockCreateGameRespondWithError = (playerName, expectedError) =>
+  nock(`${gameApiBaseUrl}`)
+    .post('/games', { game: { playerName } })
+    .reply(503, expectedError);
+
 exports.mockPlayTurn = (gameId, expectedGame) =>
   nock(`${gameApiBaseUrl}`)
     .put(`/games/${gameId}`)

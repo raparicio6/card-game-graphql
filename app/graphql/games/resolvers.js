@@ -10,7 +10,9 @@ const getGame = (_, { gameId }) =>
   getGameResolver(gameId).catch(error => {
     const errorData = error.response.data;
     const statusCode = error.response.status;
-    logger.error(`Could not get game. Error: ${JSON.stringify(errorData)} with status ${statusCode}`);
+    logger.error(
+      `Could not get game with id ${gameId}. Error: ${JSON.stringify(errorData)} with status ${statusCode}`
+    );
     return Promise.reject(gameApiError(errorData.message, statusCode));
   });
 
@@ -21,7 +23,17 @@ const createGame = (
       game: { playerName }
     }
   }
-) => createGameResolver(playerName);
+) =>
+  createGameResolver(playerName).catch(error => {
+    const errorData = error.response.data;
+    const statusCode = error.response.status;
+    logger.error(
+      `Could not create game for player ${playerName}. Error: ${JSON.stringify(
+        errorData
+      )} with status ${statusCode}`
+    );
+    return Promise.reject(gameApiError(errorData.message, statusCode));
+  });
 
 const playTurn = (_, { gameId, turn }) => playTurnResolver(gameId, turn);
 
