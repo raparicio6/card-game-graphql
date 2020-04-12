@@ -59,7 +59,7 @@ const inputTypes = gql`
   }
   input CardInput {
     type: String!
-    value: Int
+    value: Int!
   }
 `;
 

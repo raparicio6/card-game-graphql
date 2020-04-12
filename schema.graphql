@@ -63,5 +63,5 @@ input TurnInput {
 
 input CardInput {
   type: String!
-  value: Int
+  value: Int!
 }
