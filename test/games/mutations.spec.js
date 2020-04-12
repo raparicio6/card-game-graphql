@@ -6,7 +6,7 @@ const { mutate } = require('../server.test'),
 describe('games', () => {
   describe('mutations', () => {
     describe('createGame', () => {
-      it('Service respond with 200, should create game successfuly', () => {
+      it('Service respond with 201, should respond with game properly', () => {
         const playerName = 'Paul';
         const expectedGame = getGameExample({ playerName });
         mockCreateGame(playerName, expectedGame);
@@ -27,18 +27,21 @@ describe('games', () => {
         });
       });
 
-      it('Service respond with 503, should failed', () => {
+      it('Service respond with error, should respond with error', () => {
         const playerName = 'Fred';
-        mockCreateGameRespondWithError(playerName, databaseError);
+        const statusCode = 503;
+        mockCreateGameRespondWithError(playerName, databaseError, statusCode);
         return mutate(createGame({ game: { playerName } })).then(res => {
           expect(res.data).toBe(null);
           expect(res.errors[0].message).toBe(databaseError.message);
-          expect(res.errors[0].extensions.code).toBe(503);
+          expect(res.errors[0].extensions.code).toBe(statusCode);
         });
       });
     });
+  });
 
-    it('should play turn successfuly', () => {
+  describe('playTurn', () => {
+    it('Service respond with 200, should get game properly', () => {
       const gameId = 'abc123';
       const expectedGame = getGameWithTurnsExample(gameId);
       mockPlayTurn(gameId, expectedGame);
@@ -56,6 +59,17 @@ describe('games', () => {
             winner
           }
         });
+      });
+    });
+
+    it('Service respond with error, should respond with error', () => {
+      const playerName = 'Fred';
+      const statusCode = 503;
+      mockCreateGameRespondWithError(playerName, databaseError, statusCode);
+      return mutate(createGame({ game: { playerName } })).then(res => {
+        expect(res.data).toBe(null);
+        expect(res.errors[0].message).toBe(databaseError.message);
+        expect(res.errors[0].extensions.code).toBe(statusCode);
       });
     });
   });

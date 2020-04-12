@@ -6,7 +6,7 @@ const { query } = require('../server.test'),
 describe('games', () => {
   describe('queries', () => {
     describe('getGame', () => {
-      it('Service respond with 200, should get game properly', () => {
+      it('Service respond with 200, should respond with game properly', () => {
         const gameId = 'hi123';
         const expectedGame = getGameExample({ gameId });
         mockGetGame(gameId, expectedGame);
@@ -28,13 +28,14 @@ describe('games', () => {
       });
     });
 
-    it('Service respond with 404, should failed', () => {
+    it('Service respond with error, should respond with error', () => {
       const gameId = 'IdontExist';
-      mockGetGameRespondWithError(gameId, gameWasNotFoundError);
+      const statusCode = 404;
+      mockGetGameRespondWithError(gameId, gameWasNotFoundError, statusCode);
       return query(getGame(gameId)).then(res => {
         expect(res.data).toBe(null);
         expect(res.errors[0].message).toBe(gameWasNotFoundError.message);
-        expect(res.errors[0].extensions.code).toBe(404);
+        expect(res.errors[0].extensions.code).toBe(statusCode);
       });
     });
   });

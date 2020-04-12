@@ -35,7 +35,17 @@ const createGame = (
     return Promise.reject(gameApiError(errorData.message, statusCode));
   });
 
-const playTurn = (_, { gameId, turn }) => playTurnResolver(gameId, turn);
+const playTurn = (_, { gameId, turn }) =>
+  playTurnResolver(gameId, turn).catch(error => {
+    const errorData = error.response.data;
+    const statusCode = error.response.status;
+    logger.error(
+      `Could not play turn for game with id ${gameId}. Error: ${JSON.stringify(
+        errorData
+      )} with status ${statusCode}`
+    );
+    return Promise.reject(gameApiError(errorData.message, statusCode));
+  });
 
 module.exports = {
   Query: {

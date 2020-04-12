@@ -9,22 +9,27 @@ exports.mockGetGame = (gameId, expectedGame) =>
     .get(`/games/${gameId}`)
     .reply(200, expectedGame);
 
-exports.mockGetGameRespondWithError = (gameId, expectedError) =>
+exports.mockGetGameRespondWithError = (gameId, expectedError, expectedStatus) =>
   nock(`${gameApiBaseUrl}`)
     .get(`/games/${gameId}`)
-    .reply(404, expectedError);
+    .reply(expectedStatus, expectedError);
 
 exports.mockCreateGame = (playerName, expectedGame) =>
   nock(`${gameApiBaseUrl}`)
     .post('/games', { game: { playerName } })
     .reply(201, expectedGame);
 
-exports.mockCreateGameRespondWithError = (playerName, expectedError) =>
+exports.mockCreateGameRespondWithError = (playerName, expectedError, expectedStatus) =>
   nock(`${gameApiBaseUrl}`)
     .post('/games', { game: { playerName } })
-    .reply(503, expectedError);
+    .reply(expectedStatus, expectedError);
 
 exports.mockPlayTurn = (gameId, expectedGame) =>
   nock(`${gameApiBaseUrl}`)
     .put(`/games/${gameId}`)
     .reply(200, expectedGame);
+
+exports.mockPlayTurnRespondWithError = (gameId, expectedError, expectedStatus) =>
+  nock(`${gameApiBaseUrl}`)
+    .put(`/games/${gameId}`)
+    .reply(expectedStatus, expectedError);
