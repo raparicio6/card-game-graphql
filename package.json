@@ -15,7 +15,7 @@
     "lint-fix": "npm run lint -- --fix",
     "graphql-schema-inspector": "graphql-inspector-wolox-node -o schema.graphql -n app/graphql",
     "outdated": "npm outdated --depth 0",
-    "precommit": "npm run lint-diff",
+    "precommit": "npm run lint",
     "start-dev": "nodemon --inspect server.js",
     "start": "node server.js"
   },
