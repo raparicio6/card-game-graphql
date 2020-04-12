@@ -3,7 +3,7 @@ const fs = require('fs'),
   merge = require('lodash.merge');
 
 const SCHEMA = 'schema';
-const TYPE_DEFS = 'type_defs';
+const TYPE_DEFS = 'typeDefs';
 const RESOLVERS = 'resolvers';
 const MIDDLEWARES = 'middlewares';
 
