@@ -20,15 +20,13 @@ describe('games', () => {
             game: { turns, player, monster, monsterEffect, winner, statusAfterTurnOfPlayer }
           } = expectedGame;
           expect(res.data.game).toMatchObject({
-            game: {
-              id: gameId,
-              turns,
-              player,
-              monster,
-              monsterEffect,
-              winner,
-              statusAfterTurnOfPlayer
-            }
+            id: gameId,
+            turns,
+            player,
+            monster,
+            monsterEffect,
+            winner,
+            statusAfterTurnOfPlayer
           });
         });
       });
@@ -49,9 +47,7 @@ describe('games', () => {
       it('Service respond with 200, should respond with maxNumberOfTurns properly', () => {
         const maxNumberOfTurns = { maxNumberOfTurns: 12 };
         mockGetMaxNumberOfTurns(maxNumberOfTurns);
-        return query(getMaxNumberOfTurns()).then(res =>
-          expect(res.data.maxNumberOfTurns).toMatchObject(maxNumberOfTurns)
-        );
+        return query(getMaxNumberOfTurns()).then(res => expect(res.data).toMatchObject(maxNumberOfTurns));
       });
 
       it('Service respond with error, should respond with error', () => {

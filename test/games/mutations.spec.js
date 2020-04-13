@@ -20,19 +20,18 @@ describe('games', () => {
         const playerName = 'Paul';
         const expectedGame = getGameExample({ playerName });
         mockCreateGame(playerName, expectedGame);
-        return mutate(createGame({ game: { playerName } })).then(res => {
+        return mutate(createGame(playerName)).then(res => {
           const {
-            game: { id, turns, player, monster, monsterEffect, winner }
+            game: { id, turns, player, monster, monsterEffect, statusAfterTurnOfPlayer, winner }
           } = expectedGame;
           expect(res.data.createGame).toMatchObject({
-            game: {
-              id,
-              turns,
-              player,
-              monster,
-              monsterEffect,
-              winner
-            }
+            id,
+            turns,
+            player,
+            monster,
+            monsterEffect,
+            statusAfterTurnOfPlayer,
+            winner
           });
         });
       });
@@ -41,7 +40,7 @@ describe('games', () => {
         const playerName = 'Fred';
         const statusCode = 503;
         mockCreateGameRespondWithError(playerName, databaseError, statusCode);
-        return mutate(createGame({ game: { playerName } })).then(res => {
+        return mutate(createGame(playerName)).then(res => {
           expect(res.data).toBe(null);
           expect(res.errors[0].message).toBe(databaseError.message);
           expect(res.errors[0].extensions.code).toBe(statusCode);
@@ -54,19 +53,17 @@ describe('games', () => {
         const gameId = 'abc123';
         const expectedGame = getGameWithTurnsExample(gameId);
         mockPlayTurn(gameId, expectedGame);
-        return mutate(playTurn(gameId, { turn: { cardPlayed: { value: 9, type: 'damage' } } })).then(res => {
+        return mutate(playTurn(gameId, { value: 9, type: 'damage' })).then(res => {
           const {
             game: { id, turns, player, monster, monsterEffect, winner }
           } = expectedGame;
           expect(res.data.playTurn).toMatchObject({
-            game: {
-              id,
-              turns,
-              player,
-              monster,
-              monsterEffect,
-              winner
-            }
+            id,
+            turns,
+            player,
+            monster,
+            monsterEffect,
+            winner
           });
         });
       });
@@ -75,13 +72,11 @@ describe('games', () => {
         const gameId = 'abc123';
         const statusCode = 400;
         mockPlayTurnRespondWithError(gameId, cardPlayedIsNotInHandError, statusCode);
-        return mutate(playTurn(gameId, { turn: { cardPlayed: { value: 100, type: 'damage' } } })).then(
-          res => {
-            expect(res.data).toBe(null);
-            expect(res.errors[0].message).toBe(cardPlayedIsNotInHandError.message);
-            expect(res.errors[0].extensions.code).toBe(statusCode);
-          }
-        );
+        return mutate(playTurn(gameId, { value: 100, type: 'damage' })).then(res => {
+          expect(res.data).toBe(null);
+          expect(res.errors[0].message).toBe(cardPlayedIsNotInHandError.message);
+          expect(res.errors[0].extensions.code).toBe(statusCode);
+        });
       });
     });
   });

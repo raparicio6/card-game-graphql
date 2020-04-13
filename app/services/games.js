@@ -9,7 +9,7 @@ exports.getGame = gameId => {
     method: GET,
     url: `${gameApiBaseUrl}/games/${gameId}`
   };
-  return request(options).then(response => response.data);
+  return request(options).then(response => response.data.game);
 };
 
 exports.createGame = playerName => {
@@ -22,18 +22,20 @@ exports.createGame = playerName => {
       }
     }
   };
-  return request(options).then(response => response.data);
+  return request(options).then(response => response.data.game);
 };
 
-exports.playTurn = (gameId, turn) => {
+exports.playTurn = (gameId, cardPlayed) => {
   const options = {
     method: PUT,
     url: `${gameApiBaseUrl}/games/${gameId}`,
     data: {
-      turn
+      turn: {
+        cardPlayed
+      }
     }
   };
-  return request(options).then(response => response.data);
+  return request(options).then(response => response.data.game);
 };
 
 exports.getMaxNumberOfTurns = () => {
@@ -41,5 +43,5 @@ exports.getMaxNumberOfTurns = () => {
     method: GET,
     url: `${gameApiBaseUrl}/games/max_number_of_turns`
   };
-  return request(options).then(response => response.data);
+  return request(options).then(response => response.data.maxNumberOfTurns);
 };

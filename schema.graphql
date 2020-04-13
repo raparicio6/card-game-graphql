@@ -1,16 +1,12 @@
 type Query {
-  game(gameId: String!): GameContainer!
-  maxNumberOfTurns: MaxNumberOfTurnsContainer!
+  game(gameId: String!): Game!
+  maxNumberOfTurns: Int!
   healthCheck: String!
 }
 
 type Mutation {
-  createGame(game: GameInputContainer!): GameContainer!
-  playTurn(gameId: String!, turn: TurnInputContainer!): GameContainer!
-}
-
-type GameContainer {
-  game: Game!
+  createGame(playerName: String!): Game!
+  playTurn(gameId: String!, cardPlayed: CardInput): Game!
 }
 
 type Game {
@@ -19,6 +15,7 @@ type Game {
   player: Player!
   monster: Monster!
   monsterEffect: Card
+  statusAfterTurnOfPlayer: GameStatus
   winner: String
 }
 
@@ -46,27 +43,18 @@ type Card {
   value: Int
 }
 
-type GameInputContainer {
-  game: GameInput!
+type GameStatus {
+  player: EntityStatus!
+  monster: EntityStatus!
+  winner: String!
 }
 
-type GameInput {
-  playerName: String!
+type EntityStatus {
+  hp: Int!
+  shield: Int!
 }
 
-input TurnInputContainer {
-  turn: TurnInput!
-}
-
-input TurnInput {
-  cardPlayed: CardInput
-}
-
-input CardInput {
+type CardInput {
   type: String!
   value: Int!
-}
-
-type MaxNumberOfTurnsContainer {
-  maxNumberOfTurns: Int!
 }

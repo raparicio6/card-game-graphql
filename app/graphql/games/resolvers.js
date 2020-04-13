@@ -17,14 +17,7 @@ const getGame = (_, { gameId }) =>
     return Promise.reject(gameApiError(errorData.message, statusCode));
   });
 
-const createGame = (
-  _,
-  {
-    game: {
-      game: { playerName }
-    }
-  }
-) =>
+const createGame = (_, { playerName }) =>
   createGameResolver(playerName).catch(error => {
     const errorData = error.response.data;
     const statusCode = error.response.status;
@@ -36,14 +29,14 @@ const createGame = (
     return Promise.reject(gameApiError(errorData.message, statusCode));
   });
 
-const playTurn = (_, { gameId, turn }) =>
-  playTurnResolver(gameId, turn).catch(error => {
+const playTurn = (_, { gameId, cardPlayed }) =>
+  playTurnResolver(gameId, cardPlayed).catch(error => {
     const errorData = error.response.data;
     const statusCode = error.response.status;
     logger.error(
-      `Could not play turn for game with id ${gameId}. Error: ${JSON.stringify(
-        errorData
-      )} with status ${statusCode}`
+      `Could not play turn for game with id ${gameId} with card ${JSON.stringify(
+        cardPlayed
+      )}. Error: ${JSON.stringify(errorData)} with status ${statusCode}`
     );
     return Promise.reject(gameApiError(errorData.message, statusCode));
   });

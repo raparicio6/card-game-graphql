@@ -3,7 +3,55 @@ const { gql } = require('apollo-server');
 const getGame = gameId => gql`
   query {
     game(gameId: "${gameId}") {
-      game {
+      id
+      player {
+        name
+        hp
+        shield
+        cardsInHand {
+          type
+          value
+        }
+      }
+      monster {
+        hp
+        shield
+        cardsInHand {
+          type
+          value
+        }
+      }
+      turns {
+        entityWhoPlays
+        cardCanBePlayed
+        cardPlayed {
+          type
+          value
+        }
+      }
+      monsterEffect {
+        type
+        value
+      }
+      statusAfterTurnOfPlayer {
+        player {
+          hp
+          shield
+        }
+        monster {
+          hp
+          shield
+        }
+        winner
+      }
+      winner
+    }
+  }`;
+
+const createGame = playerName => ({
+  mutation: gql`
+    mutation createGame($playerName: String!) {
+      createGame(playerName: $playerName) {
         id
         player {
           name
@@ -48,99 +96,65 @@ const getGame = gameId => gql`
         winner
       }
     }
-  }`;
-
-const createGame = gameInput => ({
-  mutation: gql`
-    mutation createGame($gameInput: GameInputContainer!) {
-      createGame(game: $gameInput) {
-        game {
-          id
-          player {
-            name
-            hp
-            shield
-            cardsInHand {
-              type
-              value
-            }
-          }
-          monster {
-            hp
-            shield
-            cardsInHand {
-              type
-              value
-            }
-          }
-          turns {
-            entityWhoPlays
-            cardCanBePlayed
-            cardPlayed {
-              type
-              value
-            }
-          }
-          monsterEffect {
-            type
-            value
-          }
-          winner
-        }
-      }
-    }
   `,
-  variables: { gameInput }
+  variables: { playerName }
 });
 
-const playTurn = (gameId, turnInput) => ({
+const playTurn = (gameId, cardInput) => ({
   mutation: gql`
-    mutation playTurn($gameId: String!, $turnInput: TurnInputContainer!) {
-      playTurn(gameId: $gameId, turn: $turnInput) {
-        game {
-          id
+    mutation playTurn($gameId: String!, $cardInput: CardInput!) {
+      playTurn(gameId: $gameId, cardPlayed: $cardInput) {
+        id
+        player {
+          name
+          hp
+          shield
+          cardsInHand {
+            type
+            value
+          }
+        }
+        monster {
+          hp
+          shield
+          cardsInHand {
+            type
+            value
+          }
+        }
+        turns {
+          entityWhoPlays
+          cardCanBePlayed
+          cardPlayed {
+            type
+            value
+          }
+        }
+        monsterEffect {
+          type
+          value
+        }
+        statusAfterTurnOfPlayer {
           player {
-            name
             hp
             shield
-            cardsInHand {
-              type
-              value
-            }
           }
           monster {
             hp
             shield
-            cardsInHand {
-              type
-              value
-            }
-          }
-          turns {
-            entityWhoPlays
-            cardCanBePlayed
-            cardPlayed {
-              type
-              value
-            }
-          }
-          monsterEffect {
-            type
-            value
           }
           winner
         }
+        winner
       }
     }
   `,
-  variables: { gameId, turnInput }
+  variables: { gameId, cardInput }
 });
 
 const getMaxNumberOfTurns = () => gql`
   query {
-    maxNumberOfTurns {
-      maxNumberOfTurns
-    }
+    maxNumberOfTurns
   }
 `;
 
