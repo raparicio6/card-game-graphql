@@ -55,7 +55,7 @@ describe('games', () => {
         mockPlayTurn(gameId, expectedGame);
         return mutate(playTurn(gameId, { value: 9, type: 'damage' })).then(res => {
           const {
-            game: { id, turns, player, monster, monsterEffect, winner }
+            game: { id, turns, player, monster, monsterEffect, statusAfterTurnOfPlayer, winner }
           } = expectedGame;
           expect(res.data.playTurn).toMatchObject({
             id,
@@ -63,6 +63,7 @@ describe('games', () => {
             player,
             monster,
             monsterEffect,
+            statusAfterTurnOfPlayer,
             winner
           });
         });

@@ -44,7 +44,7 @@ const customTypes = gql`
   type GameStatus {
     player: EntityStatus!
     monster: EntityStatus!
-    winner: String!
+    winner: String
   }
   type EntityStatus {
     hp: Int!
