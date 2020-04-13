@@ -17,7 +17,7 @@ describe('games', () => {
         mockGetGame(gameId, expectedGame);
         return query(getGame(gameId)).then(res => {
           const {
-            game: { turns, player, monster, monsterEffect, winner }
+            game: { turns, player, monster, monsterEffect, winner, statusAfterTurnOfPlayer }
           } = expectedGame;
           expect(res.data.game).toMatchObject({
             game: {
@@ -26,7 +26,8 @@ describe('games', () => {
               player,
               monster,
               monsterEffect,
-              winner
+              winner,
+              statusAfterTurnOfPlayer
             }
           });
         });

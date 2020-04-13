@@ -31,6 +31,7 @@ exports.getGameExample = ({ gameId = 'abc123', name = 'Fred' }) => ({
       ]
     },
     monsterEffect: null,
+    statusAfterTurnOfPlayer: null,
     winner: null
   }
 });
@@ -113,6 +114,17 @@ exports.getGameWithTurnsExample = gameId => ({
     monsterEffect: {
       type: 'damage',
       value: 7
+    },
+    statusAfterTurnOfPlayer: {
+      player: {
+        hp: 20,
+        shield: 0
+      },
+      monster: {
+        hp: 20,
+        shield: 1
+      },
+      winner: null
     },
     winner: null
   }

@@ -34,6 +34,17 @@ const getGame = gameId => gql`
           type
           value
         }
+        statusAfterTurnOfPlayer {
+          player {
+            hp
+            shield
+          }
+          monster {
+            hp
+            shield
+          }
+          winner
+        }
         winner
       }
     }

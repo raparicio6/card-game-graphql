@@ -21,6 +21,7 @@ const customTypes = gql`
     player: Player!
     monster: Monster!
     monsterEffect: Card
+    statusAfterTurnOfPlayer: GameStatus
     winner: String
   }
   type Turn {
@@ -42,6 +43,15 @@ const customTypes = gql`
   type Card {
     type: String!
     value: Int
+  }
+  type GameStatus {
+    player: EntityStatus!
+    monster: EntityStatus!
+    winner: String!
+  }
+  type EntityStatus {
+    hp: Int!
+    shield: Int!
   }
   type MaxNumberOfTurnsContainer {
     maxNumberOfTurns: Int!
