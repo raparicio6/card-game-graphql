@@ -3,6 +3,7 @@ const { gql } = require('apollo-server');
 const rootTypes = gql`
   extend type Query {
     game(gameId: String!): GameContainer!
+    maxNumberOfTurns: MaxNumberOfTurnsContainer!
   }
   extend type Mutation {
     createGame(game: GameInputContainer!): GameContainer!
@@ -41,6 +42,9 @@ const customTypes = gql`
   type Card {
     type: String!
     value: Int
+  }
+  type MaxNumberOfTurnsContainer {
+    maxNumberOfTurns: Int!
   }
 `;
 

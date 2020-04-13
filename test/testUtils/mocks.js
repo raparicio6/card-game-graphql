@@ -33,3 +33,13 @@ exports.mockPlayTurnRespondWithError = (gameId, expectedError, expectedStatus) =
   nock(`${gameApiBaseUrl}`)
     .put(`/games/${gameId}`)
     .reply(expectedStatus, expectedError);
+
+exports.mockGetMaxNumberOfTurns = expectedResponse =>
+  nock(`${gameApiBaseUrl}`)
+    .get('/games/max_number_of_turns')
+    .reply(200, expectedResponse);
+
+exports.mockGetMaxNumberOfTurnsError = (expectedError, expectedStatus) =>
+  nock(`${gameApiBaseUrl}`)
+    .get('/games/max_number_of_turns')
+    .reply(expectedStatus, expectedError);

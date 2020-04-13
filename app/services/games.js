@@ -35,3 +35,11 @@ exports.playTurn = (gameId, turn) => {
   };
   return request(options).then(response => response.data);
 };
+
+exports.getMaxNumberOfTurns = () => {
+  const options = {
+    method: GET,
+    url: `${gameApiBaseUrl}/games/max_number_of_turns`
+  };
+  return request(options).then(response => response.data);
+};

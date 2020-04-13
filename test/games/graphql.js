@@ -125,4 +125,12 @@ const playTurn = (gameId, turnInput) => ({
   variables: { gameId, turnInput }
 });
 
-module.exports = { getGame, createGame, playTurn };
+const getMaxNumberOfTurns = () => gql`
+  query {
+    maxNumberOfTurns {
+      maxNumberOfTurns
+    }
+  }
+`;
+
+module.exports = { getGame, createGame, playTurn, getMaxNumberOfTurns };

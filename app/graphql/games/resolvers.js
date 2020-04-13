@@ -1,7 +1,8 @@
 const {
   getGame: getGameResolver,
   createGame: createGameResolver,
-  playTurn: playTurnResolver
+  playTurn: playTurnResolver,
+  getMaxNumberOfTurns: getMaxNumberOfTurnsResolver
 } = require('../../services/games');
 const { gameApiError } = require('../../errors');
 const logger = require('../../logger');
@@ -47,9 +48,20 @@ const playTurn = (_, { gameId, turn }) =>
     return Promise.reject(gameApiError(errorData.message, statusCode));
   });
 
+const getMaxNumberOfTurns = () =>
+  getMaxNumberOfTurnsResolver().catch(error => {
+    const errorData = error.response.data;
+    const statusCode = error.response.status;
+    logger.error(
+      `Could not max number of turns. Error: ${JSON.stringify(errorData)} with status ${statusCode}`
+    );
+    return Promise.reject(gameApiError(errorData.message, statusCode));
+  });
+
 module.exports = {
   Query: {
-    game: getGame
+    game: getGame,
+    maxNumberOfTurns: getMaxNumberOfTurns
   },
   Mutation: {
     createGame,

@@ -1,5 +1,6 @@
 type Query {
   game(gameId: String!): GameContainer!
+  maxNumberOfTurns: MaxNumberOfTurnsContainer!
   healthCheck: String!
 }
 
@@ -64,4 +65,8 @@ input TurnInput {
 input CardInput {
   type: String!
   value: Int!
+}
+
+type MaxNumberOfTurnsContainer {
+  maxNumberOfTurns: Int!
 }
