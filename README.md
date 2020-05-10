@@ -1,5 +1,7 @@
 # Card Game
 
+<img alt="App" src="./app-image.png">
+
 ## Getting Started
 
 ### Installing
@@ -13,7 +15,7 @@ Create a *.env* file at the root of the project and add:
 `GAME_API_BASE_URL=http://localhost:3001`  
 By default [Backend](https://github.com/raparicio6/card-game-node) uses *http://localhost:3001* as the base url.
 
-This project has its corresponding [Frontend](https://github.com/raparicio6/card-game-react) too.
+**This project has its corresponding [Frontend](https://github.com/raparicio6/card-game-react) too.**
 
 ### Starting app
 
