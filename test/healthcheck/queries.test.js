@@ -4,7 +4,7 @@ const { query } = require('../server.test'),
 describe('healthcheck', () => {
   describe('queries', () => {
     describe('healthCheck', () => {
-      it('app is ok should respond with healt', () =>
+      it('app is ok respond with health', () =>
         query(healthCheck()).then(res => expect(res.data.healthCheck).toStrictEqual(expect.any(String))));
     });
   });

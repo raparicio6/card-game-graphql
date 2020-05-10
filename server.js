@@ -11,4 +11,7 @@ new ApolloServer({ schema })
     logger.info(`🚀 Server ready at ${url}`);
     logger.info(`🚀 Subscriptions ready at ${subscriptionsUrl}`);
   })
-  .catch(logger.error);
+  .catch(error => {
+    logger.error(error);
+    process.exit(1);
+  });

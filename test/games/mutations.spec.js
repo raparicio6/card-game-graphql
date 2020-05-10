@@ -16,7 +16,7 @@ const { mutate } = require('../server.test'),
 describe('games', () => {
   describe('mutations', () => {
     describe('createGame', () => {
-      it('Service respond with 201, should respond with game properly', () => {
+      it('Service respond with 201, respond with game', () => {
         const playerName = 'Paul';
         const expectedGame = getGameExample({ playerName });
         mockCreateGame(playerName, expectedGame);
@@ -36,7 +36,7 @@ describe('games', () => {
         });
       });
 
-      it('Service respond with error, should respond with error', () => {
+      it('Service respond with error, respond with error', () => {
         const playerName = 'Fred';
         const statusCode = 503;
         mockCreateGameRespondWithError(playerName, databaseError, statusCode);
@@ -49,7 +49,7 @@ describe('games', () => {
     });
 
     describe('playTurn', () => {
-      it('Service respond with 200, should get game properly', () => {
+      it('Service respond with 200, respond with game', () => {
         const gameId = 'abc123';
         const expectedGame = getGameWithTurnsExample(gameId);
         mockPlayTurn(gameId, expectedGame);
@@ -69,7 +69,7 @@ describe('games', () => {
         });
       });
 
-      it('Service respond with error, should respond with error', () => {
+      it('Service respond with error, respond with error', () => {
         const gameId = 'abc123';
         const statusCode = 400;
         mockPlayTurnRespondWithError(gameId, cardPlayedIsNotInHandError, statusCode);

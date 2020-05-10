@@ -11,7 +11,7 @@ const { query } = require('../server.test'),
 describe('games', () => {
   describe('queries', () => {
     describe('game', () => {
-      it('Service respond with 200, should respond with game properly', () => {
+      it('Service respond with 200, respond with game', () => {
         const gameId = 'hi123';
         const expectedGame = getGameExample({ gameId });
         mockGetGame(gameId, expectedGame);
@@ -31,7 +31,7 @@ describe('games', () => {
         });
       });
 
-      it('Service respond with error, should respond with error', () => {
+      it('Service respond with error, respond with error', () => {
         const gameId = 'IdontExist';
         const statusCode = 404;
         mockGetGameRespondWithError(gameId, gameWasNotFoundError, statusCode);
@@ -44,13 +44,13 @@ describe('games', () => {
     });
 
     describe('maxNumberOfTurns', () => {
-      it('Service respond with 200, should respond with maxNumberOfTurns properly', () => {
+      it('Service respond with 200, respond with maxNumberOfTurns', () => {
         const maxNumberOfTurns = { maxNumberOfTurns: 12 };
         mockGetMaxNumberOfTurns(maxNumberOfTurns);
         return query(getMaxNumberOfTurns()).then(res => expect(res.data).toMatchObject(maxNumberOfTurns));
       });
 
-      it('Service respond with error, should respond with error', () => {
+      it('Service respond with error, respond with error', () => {
         const error = { message: 'Service Unavailable' };
         const statusCode = 503;
         mockGetMaxNumberOfTurnsError(error, statusCode);
