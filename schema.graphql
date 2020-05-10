@@ -46,7 +46,7 @@ type Card {
 type GameStatus {
   player: EntityStatus!
   monster: EntityStatus!
-  winner: String!
+  winner: String
 }
 
 type EntityStatus {
@@ -54,7 +54,7 @@ type EntityStatus {
   shield: Int!
 }
 
-type CardInput {
+input CardInput {
   type: String!
   value: Int!
 }
