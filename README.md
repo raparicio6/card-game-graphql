@@ -1,5 +1,8 @@
 # Card Game
 
+[![Build Status](https://circleci.com/gh/raparicio6/card-game-graphql.svg?style=shield)](https://circleci.com/gh/raparicio6/card-game-graphql)
+[![Coverage Status](https://coveralls.io/repos/github/raparicio6/card-game-graphql/badge.svg?branch=master)](https://coveralls.io/github/raparicio6/card-game-graphql?branch=master)
+
 <img alt="App" src="./app-image.png">
 
 ## Getting Started
