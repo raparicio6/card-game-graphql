@@ -5,6 +5,22 @@
 
 <img alt="App" src="./app-image.png">
 
+## Game rules
+
+Each turn the player must draw a new card and play another one.  
+To win the game, you must kill the monster before you run out of turns or health points.‍
+
+<ins>Max turns</ins>: 16
+
+<ins>Effects</ins>:  
+* Heal: increase the hp of the entity (user or monster)  
+* Shield: increase the shield of the entity (user or monster)  
+* Damage: decrease the hp or shield (if is not 0) of the opponent  
+* Horror: the opponent lost the turn (only the monster has this card)  
+
+Take advantage of your cards! They are higher than the monster's  
+Have fun!
+
 ## Getting Started
 
 ### Installing
