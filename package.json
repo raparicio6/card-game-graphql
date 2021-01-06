@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "apollo-server": "^2.12.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "express-wolox-logger": "^1.0.0",
     "graphql": "^15.0.0",
     "graphql-middleware": "^4.0.2",
